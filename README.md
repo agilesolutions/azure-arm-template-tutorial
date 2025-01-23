@@ -21,15 +21,19 @@ variable "ssh_public_key" {
 }
 ```
 ## Call get-versions API via command line
+```
 az aks get-versions --location centralus -o table
-
+```
 ## log on AZ
-- az login
-- az version -o=json
-- az account list
-
+```
+az login
+az version -o=json
+az account list
+```
 ## find choco install azure cli
-- where az
+```
+where az
+```
 
 # Deploy template
 
