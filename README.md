@@ -86,5 +86,33 @@ kubectl get service store-front --watch
 az group delete --name aks-cluster-template_rg001
 ```
 
+## Save your templates as specs
+Idea behind managing your templates as specs
+- Provide your company with set of blueprints
+- Share these blueprints with your squands/dev teams
+- Specs are Azure managed as resource, that makes them managable over the portal and AZURE CLI
+- Implicitely this means they can get AZ RBAC protected, backed up by AD Groups
+- They can get deployed without having write access
+
+
+
+
+
+# ARM template create vault based on user-assigned managed identity
+## Intro on managed identities
+- Managed identities for Azure resources eliminate the need to manage credentials in code. You can use them to get a Microsoft Entra token for your applications. The applications can use the token when accessing resources that support Microsoft Entra authentication.
+- There are two types of managed identities: system-assigned and user-assigned.
+- This identity is restricted to only one resource, and you can grant permissions to the managed identity by using Azure role-based access control (RBAC). The name of the system-assigned service principal is always the same as the name of the Azure resource it's created for.
+- While developers can securely store the secrets in Azure Key Vault, services need a way to access Azure Key Vault. Managed identities provide an automatically managed identity in Microsoft Entra ID for applications to use when connecting to resources that support Microsoft Entra authentication.User-assigned managed identities can be used on multiple resources.
+- Applications can use managed identities to obtain Microsoft Entra tokens without having to manage any credentials.
+
+## AZ CLI create user assigned managed identity
+```
+az group create --name aks-cluster-template_rg001 --location centralus
+az identity create --name aks-template-id001 --resource-group aks-cluster-template_rg001 --location eastus
+az identity list -g aks-cluster-template_rg001
+```
+
+
 ## References
 - [Quickstart deploying AKS cluster using ARM templates](https://learn.microsoft.com/en-us/azure/aks/learn/quick-kubernetes-deploy-rm-template?tabs=azure-cli)
